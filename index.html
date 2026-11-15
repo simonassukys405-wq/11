@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Flowers - Luxury Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        /* Paslepia scrollbar, bet leidžia scrollinti */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f5f5f4; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#FFF9F9] text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Viršutinė juosta -->
+    <header class="w-full absolute inset-x-0 top-0 z-50 bg-transparent backdrop-blur-sm border-b border-white/10 text-white">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+             <img src="" alt="logo" class="h-10 w-10 rounded-full object-cover bg-rose-100">
+                <div>
+                    <h1 class="font-serif text-xl tracking-wide text-white font-bold">Dream Flowers</h1>
+                    <p class="text-[10px] tracking-[0.2em] uppercase text-stone-300" data-i18n="subtitle">Luxury Boutique</p>
+                </div>
+            </div> 
+            <div class="flex items-center space-x-4">
+                <!-- Kalbos keitimas -->
+                <div class="relative">
+                    <button onclick="toggleLangMenu()" class="flex items-center space-x-1 text-xs font-medium bg-stone-50 border border-stone-200 px-3 py-2 rounded-lg hover:bg-stone-100 transition text-stone-800">
+                        <span id="currentLang">LT</span>
+                        <svg class="w-3 h-3 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-32 bg-white/95 backdrop-blur-md border border-stone-200 rounded-xl shadow-xl py-1 z-50">
+                        <button onclick="setLang('LT')" class="w-full text-left px-4 py-2 text-xs hover:bg-rose-50 text-stone-700 font-medium">Lietuvių (LT)</button>
+                        <button onclick="setLang('EN')" class="w-full text-left px-4 py-2 text-xs hover:bg-rose-50 text-stone-700 font-medium">English (EN)</button>
+                        <button onclick="setLang('RU')" class="w-full text-left px-4 py-2 text-xs hover:bg-rose-50 text-stone-700 font-medium">Русский (RU)</button>
+                    </div>
+                </div>
+                <!-- Profilis -->
+                <button onclick="openProfileFlow()" class="flex items-center space-x-2 p-2 text-white hover:text-stone-300 transition" title="Profilis">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span id="headerProfileName" class="text-sm font-medium hidden sm:block" data-i18n="login">Prisijungti</span>
+                </button>
+                <!-- Krepšelis -->
+                <button onclick="openModal('checkoutModal')" class="relative p-2 text-white hover:text-stone-300 transition" title="Krepšelis">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span id="cartBadge" class="hidden absolute top-0 right-0 bg-rose-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pagrindinis turinys -->
+    <main class="flex-grow">
+        <section class="relative bg-stone-900 text-white pt-4 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[500px] flex items-center justify-center">
+            <div class="absolute inset-0 z-0">
+                <img src="c:\Users\simon\Pictures\Screenshots\Prabangus rožių ir aksomo dekoras.png" class="w-full h-full object-cover opacity-50">
+                <div class="absolute inset-0 bg-gradient-to-b from-stone-950/40 via-stone-950/20 to-stone-900/60"></div>
+            </div>
+            <div class="relative z-10 max-w-3xl text-center mt-20">
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal tracking-wide mb-4 leading-tight" data-i18n="hero_title">Sukurkite tobulą akimirką su Dream Flowers</h2>
+                <p class="text-stone-200 text-sm sm:text-base font-light max-w-xl mx-auto leading-relaxed" data-i18n="hero_desc">Kiekviena kompozicija kuriama individualiai su meile ir kruopštumu. Atraskite mūsų išskirtines gėlių puokštes arba prabangias dovanų dėžutes.</p>
+            </div>
+        </section>
+
+        <!-- Kategorijų sekcija -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="text-center mb-12">
+                <span class="inline-block px-3 py-1 bg-rose-100/60 text-rose-900 text-xs font-semibold uppercase tracking-wider rounded-full mb-3" data-i18n="choose_service">Pasirinkite paslaugą</span>
+                <h3 class="font-serif text-3xl text-stone-900 mb-2" data-i18n="our_compositions">Mūsų kompozicijos ir užsakymai</h3>
+                <p class="text-stone-500 text-sm" data-i18n="click_to_view">Spustelėkite ant Puokštės arba Dėžutės, kad pamatytumėte variantus.</p>
+            </div>
+
+            <!-- Tinklelis -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Puokštės kortelė -->
+                <div class="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden flex flex-col justify-between group hover:shadow-md transition">
+                    <div class="relative h-[400px] overflow-hidden cursor-pointer bg-stone-100 flex items-center justify-center" onclick="openModal('bouquetModal')">
+                        <img src="c:\Users\simon\Pictures\Screenshots\dva.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 bg-stone-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col justify-end p-6 text-white">
+                            <span class="text-xs uppercase tracking-widest text-rose-200 font-semibold mb-1" data-i18n="category">Kategorija</span>
+                            <h4 class="font-serif text-2xl font-bold mb-1" data-i18n="bouquet">Puokštė</h4>
+                            <p class="text-xs text-stone-300" data-i18n="6_options">6 išskirtiniai pasirinkimai įvairioms progoms</p>
+                        </div>
+                    </div>
+                    <div class="p-4 px-6 flex items-center justify-between border-t border-stone-50">
+                        <span class="text-xs text-stone-500" data-i18n="view_options">Peržiūrėti pasirinkimus</span>
+                        <button onclick="openModal('bouquetModal')" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-900 px-4 py-2 rounded-xl transition" data-i18n="open">Atidaryti</button>
+                    </div>
+                </div>
+
+                <!-- Dėžutės kortelė -->
+                <div class="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden flex flex-col justify-between group hover:shadow-md transition">
+                    <div class="relative h-[400px] overflow-hidden cursor-pointer" onclick="openModal('boxModal')">
+                        <img src="c:\Users\simon\Pictures\Screenshots\021888E5-4990-491C-A278-299AF7A5DC60.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 bg-stone-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent flex flex-col justify-end p-6 text-white">
+                            <span class="text-xs uppercase tracking-widest text-rose-200 font-semibold mb-1" data-i18n="category">Kategorija</span>
+                            <h4 class="font-serif text-2xl font-bold mb-1" data-i18n="box">Dėžutė</h4>
+                            <p class="text-xs text-stone-300" data-i18n="6_luxury_options">6 prabangūs pasirinkimai</p>
+                        </div>
+                    </div>
+                    <div class="p-4 px-6 flex items-center justify-between border-t border-stone-50">
+                        <span class="text-xs text-stone-500" data-i18n="view_options">Peržiūrėti pasirinkimus</span>
+                        <button onclick="openModal('boxModal')" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-900 px-4 py-2 rounded-xl transition" data-i18n="open">Atidaryti</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Susikurk pats" juosta -->
+            <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-stone-300 transition group">
+                <div class="flex items-center space-x-5">
+                    <div class="w-14 h-14 rounded-2xl bg-stone-900 text-white flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl font-bold text-stone-900 mb-1" data-i18n="cant_find">Nerandate ko ieškote?</h4>
+                        <p class="text-sm text-stone-500" data-i18n="custom_desc">Susikurkite savo tobulą kompoziciją. Nurodykite biudžetą, gėles ir detales, o mes ją įgyvendinsime.</p>
+                    </div>
+                </div>
+                <button onclick="openModal('customModal')" class="w-full sm:w-auto bg-stone-900 hover:bg-rose-900 text-white font-medium px-8 py-3.5 rounded-xl transition flex items-center justify-center space-x-2 shrink-0 shadow-sm">
+                    <span data-i18n="create_custom">Susikurti pačiam</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-stone-900 text-stone-300 py-12 px-6 mt-16 border-t border-stone-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start justify-between gap-8">
+            <div>
+                <h3 class="font-serif text-2xl font-bold text-white mb-2">Dream Flowers</h3>
+                <p class="text-sm text-stone-400" data-i18n="footer_desc">Prabangios gėlių puokštės ir dėžutės jūsų ypatingoms progoms.</p>
+            </div>
+            <div class="flex flex-col items-start gap-3">
+                <span class="text-sm font-medium text-stone-400 mb-1" data-i18n="follow_us">Sekite mus:</span>
+                <a href="#" class="text-stone-300 hover:text-white transition text-sm">📷 Instagram: @dreamflowers.lt</a>
+                <a href="#" class="text-stone-300 hover:text-white transition text-sm">📘 Facebook puslapis</a>
+                <a href="#" class="text-stone-300 hover:text-white transition text-sm">🎵 TikTok: @dreamflowerslt</a>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-8 pt-6 border-t border-stone-800 text-center text-xs text-stone-500">
+            &copy; 2026 Dream Flowers. Visos teisės saugomos.
+        </div>
+    </footer>
+
+    <!-- MODALAI -->
+
+    <!-- Puokščių Modalas -->
+    <div id="bouquetModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('bouquetModal')"></div>
+        <div class="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-3xl shadow-2xl flex flex-col m-4 overflow-hidden">
+            <div class="flex items-center justify-between p-6 border-b border-stone-100 bg-stone-50 shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="text-2xl">💐</div>
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-800" data-i18n="bouquets_catalog">Puokščių katalogas</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal('bouquetModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full bg-white shadow-sm">✕</button>
+            </div>
+            <div class="p-6 overflow-y-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-stone-50 custom-scrollbar">
+                <!-- 1 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-jai.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_for_her">Puokštė Jai</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">55.00 €</span>
+                            <button onclick="addToCart('Puokštė Jai', '55.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-jam.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_for_him">Puokštė Jam</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">55.00 €</span>
+                            <button onclick="addToCart('Puokštė Jam', '55.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-saldainiai.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_sweet">Su saldumynais</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">65.00 €</span>
+                            <button onclick="addToCart('Puokštė su saldumynais', '65.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-jubiliejus.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_anniversary">Jubiliejinė</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">85.00 €</span>
+                            <button onclick="addToCart('Jubiliejinė Puokštė', '85.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-premium.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_premium">Premium Mega</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">140.00 €</span>
+                            <button onclick="addToCart('Premium Mega Puokštė', '140.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\puokste-sezonine.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=Puok%C5%A1t%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="b_seasonal">Sezoninė Kompozicija</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">50.00 €</span>
+                            <button onclick="addToCart('Sezoninė Puokštė', '50.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dėžučių Modalas -->
+    <div id="boxModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('boxModal')"></div>
+        <div class="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-3xl shadow-2xl flex flex-col m-4 overflow-hidden">
+            <div class="flex items-center justify-between p-6 border-b border-stone-100 bg-stone-50 shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="text-2xl">🎁</div>
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-800" data-i18n="boxes_catalog">Dėžučių katalogas</h3>
+                    </div>
+                </div>
+                <button onclick="closeModal('boxModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full bg-white shadow-sm">✕</button>
+            </div>
+            <div class="p-6 overflow-y-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-stone-50 custom-scrollbar">
+                <!-- 1 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-jai.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_for_her">Dėžutė Jai</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">50.00 €</span>
+                            <button onclick="addToCart('Dėžutė Jai', '50.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-jam.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_for_him">Dėžutė Jam</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">60.00 €</span>
+                            <button onclick="addToCart('Dėžutė Jam', '60.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-saldaini.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_sweet">Su saldumynais</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">75.00 €</span>
+                            <button onclick="addToCart('Dėžutė su saldumynais', '75.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-raudona.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_red">Klasikinė Raudona</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">90.00 €</span>
+                            <button onclick="addToCart('Raudonos Rožės Dėžutėje', '90.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-premium.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_premium">Premium Karališka</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">140.00 €</span>
+                            <button onclick="addToCart('Premium Dėžutė', '140.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6 -->
+                <div class="bg-white rounded-2xl border border-stone-100 flex flex-col overflow-hidden group">
+                    <div class="h-48 bg-stone-200 overflow-hidden relative">
+                        <img src="C:\Users\simon\Pictures\dezute-miegancios.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400x300?text=D%C4%97%C5%BEut%C4%97'">
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h4 class="font-serif text-xl font-bold text-stone-800 mb-1" data-i18n="box_sleep">Miegančios Rožės</h4>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-50 mt-auto">
+                            <span class="text-lg font-bold text-stone-800">85.00 €</span>
+                            <button onclick="addToCart('Miegančios Rožės', '85.00 €')" class="bg-stone-800 hover:bg-rose-900 text-white font-medium px-4 py-2 rounded-xl text-sm" data-i18n="buy">Pirkti</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modalas ("Susikurk Pats") -->
+    <div id="customModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('customModal')"></div>
+        <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl flex flex-col m-4 overflow-hidden p-6 md:p-8">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-100 mb-4">
+                <h3 class="font-serif text-2xl font-bold text-stone-800" data-i18n="custom_order">Individualus Užsakymas</h3>
+                <button onclick="closeModal('customModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full transition">✕</button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="occasion">Proga</label>
+                    <input type="text" id="customOccasion" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="budget">Biudžetas (€)</label>
+                    <input type="number" id="customBudget" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="wishes">Gėlių pageidavimai</label>
+                    <textarea id="customDesc" rows="3" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm resize-none focus:outline-none focus:border-stone-800"></textarea>
+                </div>
+                <button onclick="submitCustomOrder()" class="w-full bg-stone-800 hover:bg-rose-900 text-white font-medium py-3.5 rounded-xl transition shadow-sm text-sm mt-2" data-i18n="send_request">
+                    Siųsti užklausą
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modalas (Registracija / Prisijungimas) -->
+    <div id="authModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('authModal')"></div>
+        <div class="relative w-full max-w-sm bg-white rounded-3xl shadow-2xl flex flex-col m-4 overflow-hidden p-6 md:p-8">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-100 mb-4">
+                <h3 id="authModalTitle" class="font-serif text-2xl font-bold text-stone-800" data-i18n="login">Prisijungimas</h3>
+                <button onclick="closeModal('authModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full transition">✕</button>
+            </div>
+
+            <!-- Prisijungimo forma -->
+            <div id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">El. Paštas</label>
+                    <input type="email" id="loginEmail" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="password">Slaptažodis</label>
+                    <input type="password" id="loginPass" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <button onclick="handleLogin()" class="w-full bg-stone-800 hover:bg-stone-900 text-white font-medium py-3 rounded-xl text-sm" data-i18n="login">Prisijungti</button>
+                <p class="text-xs text-center text-stone-500 mt-4">
+                    <span data-i18n="no_account">Neturite paskyros?</span> <button onclick="toggleAuthMode()" class="font-bold text-stone-800 underline" data-i18n="register">Registruotis</button>
+                </p>
+            </div>
+
+            <!-- Registracijos forma -->
+            <div id="registerForm" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="name">Vardas</label>
+                    <input type="text" id="regName" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">El. Paštas</label>
+                    <input type="email" id="regEmail" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="password">Slaptažodis</label>
+                    <input type="password" id="regPass" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-stone-800">
+                </div>
+                <button onclick="handleRegister()" class="w-full bg-stone-800 hover:bg-stone-900 text-white font-medium py-3 rounded-xl text-sm" data-i18n="register">Registruotis</button>
+                <p class="text-xs text-center text-stone-500 mt-4">
+                    <span data-i18n="has_account">Jau turite paskyrą?</span> <button onclick="toggleAuthMode()" class="font-bold text-stone-800 underline" data-i18n="login">Prisijungti</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modalas (Prisijungusio vartotojo Dashboard - Atskiras gražus langas) -->
+    <div id="dashboardModal" class="hidden fixed inset-0 z-[120] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('dashboardModal')"></div>
+        <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row h-[75vh] m-4 overflow-hidden">
+            <!-- Sidebar -->
+            <div class="w-full md:w-1/3 bg-stone-900 text-white p-8 flex flex-col">
+                <h3 class="font-serif text-2xl font-bold mb-8" data-i18n="my_profile">Mano Profilis</h3>
+                <div class="mb-8 text-center">
+                   <div id="dashAvatar" class="w-24 h-24 rounded-full bg-rose-900 text-white flex items-center justify-center text-4xl font-serif font-bold mb-4 mx-auto border-4 border-stone-800">V</div>
+                   <p class="font-bold text-xl mb-1" id="dashName">Vardas</p>
+                   <p class="text-stone-400 text-sm" id="dashEmail">el@pastas.lt</p>
+                </div>
+                <button onclick="handleLogout()" class="mt-auto bg-stone-800 hover:bg-rose-900 text-white font-medium w-full py-3 rounded-xl transition" data-i18n="logout">Atsijungti</button>
+            </div>
+            <!-- Main Content (Istorija) -->
+            <div class="w-full md:w-2/3 bg-stone-50 p-6 md:p-10 flex flex-col">
+                <div class="flex justify-between items-center mb-6 border-b border-stone-200 pb-4 shrink-0">
+                    <h4 class="font-serif text-2xl font-bold text-stone-800" data-i18n="my_orders">Mano Užsakymai</h4>
+                    <button onclick="closeModal('dashboardModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full bg-white shadow-sm transition">✕</button>
+                </div>
+                <div id="userOrdersList" class="flex-grow overflow-y-auto space-y-4 pr-2 custom-scrollbar">
+                    <!-- Užsakymai atsiranda čia -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Krepšelio / Atsiskaitymo langas -->
+    <div id="checkoutModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center">
+        <div class="absolute inset-0 bg-stone-900/60 backdrop-blur-sm cursor-pointer transition-opacity" onclick="closeModal('checkoutModal')"></div>
+        <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl flex flex-col m-4 overflow-hidden p-6 md:p-8 max-h-[90vh]">
+            <div class="flex items-center justify-between pb-4 border-b border-stone-100 shrink-0">
+                <h3 class="font-serif text-2xl font-bold text-stone-800" data-i18n="cart_title">Jūsų krepšelis</h3>
+                <button onclick="closeModal('checkoutModal')" class="p-2 text-stone-400 hover:text-stone-600 rounded-full bg-white shadow-sm transition">✕</button>
+            </div>
+            <div class="py-4 space-y-4 overflow-y-auto custom-scrollbar">
+                <div id="cartItemsList" class="space-y-3"></div>
+                <div class="flex space-x-2 pt-2">
+                    <input type="text" id="discountInput" placeholder="Kodas (pvz. GELĖS20)" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:outline-none focus:border-stone-800 text-sm">
+                    <button onclick="applyDiscount()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-medium px-4 py-2.5 rounded-xl transition text-sm whitespace-nowrap" data-i18n="apply">Pritaikyti</button>
+                </div>
+                <div class="pt-2">
+                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="payment">Mokėjimo būdas</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="flex items-center justify-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:border-stone-800 transition text-sm font-medium text-stone-700 bg-stone-50">
+                            <input type="radio" name="paymentMethod" value="SEB" checked class="mr-2 accent-stone-800"> SEB
+                        </label>
+                        <label class="flex items-center justify-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:border-stone-800 transition text-sm font-medium text-stone-700 bg-stone-50">
+                            <input type="radio" name="paymentMethod" value="Swedbank" class="mr-2 accent-stone-800"> Swedbank
+                        </label>
+                        <label class="flex items-center justify-center p-3 rounded-xl border border-stone-200 cursor-pointer hover:border-stone-800 transition text-sm font-medium text-stone-700 bg-stone-50">
+                            <input type="radio" name="paymentMethod" value="PayPal" class="mr-2 accent-stone-800"> PayPal
+                        </label>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-2 border-t border-stone-100">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="name">Vardas ir pavardė</label>
+                        <input type="text" id="orderName" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-stone-800 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2" data-i18n="address">Pristatymo adresas Vilniuje</label>
+                        <input type="text" id="orderAddress" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:border-stone-800 text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-stone-100 grid grid-cols-2 gap-3 shrink-0">
+                <button onclick="closeModal('checkoutModal')" class="border border-stone-300 hover:border-stone-800 text-stone-700 font-medium py-3 rounded-xl transition text-center text-sm" data-i18n="continue_shopping">Atgal</button>
+                <button onclick="submitOrder()" class="bg-stone-800 hover:bg-rose-900 text-white font-medium py-3 rounded-xl transition text-center text-sm shadow-sm" data-i18n="order_now">Užsisakyti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIKA -->
+    <script>
+        // ----------------------------------------------------------------
+        // 1. VERTIMAI (LT, EN, RU)
+        // ----------------------------------------------------------------
+        const translations = {
+            'LT': {
+                'subtitle': 'Luxury Boutique',
+                'login': 'Prisijungti',
+                'register': 'Registruotis',
+                'logout': 'Atsijungti',
+                'hero_title': 'Sukurkite tobulą akimirką su Dream Flowers',
+                'hero_desc': 'Kiekviena kompozicija kuriama individualiai su meile ir kruopštumu. Atraskite mūsų išskirtines gėlių puokštes arba prabangias dovanų dėžutes.',
+                'choose_service': 'Pasirinkite paslaugą',
+                'our_compositions': 'Mūsų kompozicijos ir užsakymai',
+                'click_to_view': 'Spustelėkite ant Puokštės arba Dėžutės, kad pamatytumėte variantus.',
+                'category': 'Kategorija',
+                'bouquet': 'Puokštė',
+                'box': 'Dėžutė',
+                '6_options': '6 išskirtiniai pasirinkimai įvairioms progoms',
+                '6_luxury_options': '6 prabangūs pasirinkimai',
+                'view_options': 'Peržiūrėti pasirinkimus',
+                'open': 'Atidaryti',
+                'cant_find': 'Nerandate ko ieškote?',
+                'custom_desc': 'Susikurkite savo tobulą kompoziciją. Nurodykite biudžetą, gėles ir detales, o mes ją įgyvendinsime.',
+                'create_custom': 'Susikurti pačiam',
+                'footer_desc': 'Prabangios gėlių puokštės ir dėžutės jūsų ypatingoms progoms.',
+                'follow_us': 'Sekite mus:',
+                'bouquets_catalog': 'Puokščių katalogas',
+                'boxes_catalog': 'Dėžučių katalogas',
+                'b_for_her': 'Puokštė Jai', 'b_for_him': 'Puokštė Jam', 'b_sweet': 'Su saldumynais', 'b_anniversary': 'Jubiliejinė', 'b_premium': 'Premium Mega', 'b_seasonal': 'Sezoninė',
+                'box_for_her': 'Dėžutė Jai', 'box_for_him': 'Dėžutė Jam', 'box_sweet': 'Su saldumynais', 'box_red': 'Klasikinė Raudona', 'box_premium': 'Premium Karališka', 'box_sleep': 'Miegančios Rožės',
+                'buy': 'Pirkti',
+                'custom_order': 'Individualus Užsakymas',
+                'occasion': 'Proga',
+                'budget': 'Biudžetas (€)',
+                'wishes': 'Gėlių pageidavimai',
+                'send_request': 'Siųsti užklausą',
+                'password': 'Slaptažodis',
+                'name': 'Vardas',
+                'no_account': 'Neturite paskyros?',
+                'has_account': 'Jau turite paskyrą?',
+                'my_profile': 'Mano Profilis',
+                'my_orders': 'Mano Užsakymai',
+                'cart_title': 'Jūsų krepšelis',
+                'apply': 'Pritaikyti',
+                'payment': 'Mokėjimo būdas',
+                'address': 'Pristatymo adresas',
+                'continue_shopping': 'Atgal',
+                'order_now': 'Užsisakyti'
+            },
+            'EN': {
+                'subtitle': 'Luxury Boutique',
+                'login': 'Login',
+                'register': 'Register',
+                'logout': 'Logout',
+                'hero_title': 'Create the perfect moment with Dream Flowers',
+                'hero_desc': 'Every arrangement is created individually with love and care. Discover our exclusive bouquets and luxury gift boxes.',
+                'choose_service': 'Choose a Service',
+                'our_compositions': 'Our Compositions & Orders',
+                'click_to_view': 'Click on a Bouquet or a Box to see the variants.',
+                'category': 'Category',
+                'bouquet': 'Bouquet',
+                'box': 'Flower Box',
+                '6_options': '6 exclusive options for various occasions',
+                '6_luxury_options': '6 luxury options',
+                'view_options': 'View Options',
+                'open': 'Open',
+                'cant_find': 'Not finding what you need?',
+                'custom_desc': 'Create your perfect arrangement. Provide your budget, flowers, and details, and we will make it happen.',
+                'create_custom': 'Custom Order',
+                'footer_desc': 'Luxury flower bouquets and boxes for your special occasions.',
+                'follow_us': 'Follow us:',
+                'bouquets_catalog': 'Bouquets Catalog',
+                'boxes_catalog': 'Boxes Catalog',
+                'b_for_her': 'Bouquet for Her', 'b_for_him': 'Bouquet for Him', 'b_sweet': 'With Sweets', 'b_anniversary': 'Anniversary', 'b_premium': 'Premium Mega', 'b_seasonal': 'Seasonal',
+                'box_for_her': 'Box for Her', 'box_for_him': 'Box for Him', 'box_sweet': 'With Sweets', 'box_red': 'Classic Red', 'box_premium': 'Premium Royal', 'box_sleep': 'Sleeping Roses',
+                'buy': 'Buy',
+                'custom_order': 'Custom Order',
+                'occasion': 'Occasion',
+                'budget': 'Budget (€)',
+                'wishes': 'Flower Wishes',
+                'send_request': 'Send Request',
+                'password': 'Password',
+                'name': 'Name',
+                'no_account': 'Don\'t have an account?',
+                'has_account': 'Already have an account?',
+                'my_profile': 'My Profile',
+                'my_orders': 'My Orders',
+                'cart_title': 'Your Cart',
+                'apply': 'Apply',
+                'payment': 'Payment Method',
+                'address': 'Delivery Address',
+                'continue_shopping': 'Back',
+                'order_now': 'Order Now'
+            },
+            'RU': {
+                'subtitle': 'Элитный Бутик',
+                'login': 'Войти',
+                'register': 'Регистрация',
+                'logout': 'Выйти',
+                'hero_title': 'Создайте идеальный момент с Dream Flowers',
+                'hero_desc': 'Каждая композиция создается индивидуально с любовью. Откройте для себя наши эксклюзивные букеты и подарочные коробки.',
+                'choose_service': 'Выберите услугу',
+                'our_compositions': 'Наши композиции и заказы',
+                'click_to_view': 'Нажмите на Букет или Коробку, чтобы увидеть варианты.',
+                'category': 'Категория',
+                'bouquet': 'Букет',
+                'box': 'Коробка',
+                '6_options': '6 эксклюзивных вариантов',
+                '6_luxury_options': '6 роскошных вариантов',
+                'view_options': 'Посмотреть варианты',
+                'open': 'Открыть',
+                'cant_find': 'Не нашли то, что искали?',
+                'custom_desc': 'Создайте идеальную композицию. Укажите бюджет и пожелания, а мы воплотим их в жизнь.',
+                'create_custom': 'Создать свой',
+                'footer_desc': 'Роскошные букеты и коробки для особых случаев.',
+                'follow_us': 'Подпишитесь:',
+                'bouquets_catalog': 'Каталог букетов',
+                'boxes_catalog': 'Каталог коробок',
+                'b_for_her': 'Букет для Нее', 'b_for_him': 'Букет для Него', 'b_sweet': 'Со сладостями', 'b_anniversary': 'Юбилейный', 'b_premium': 'Премиум Мега', 'b_seasonal': 'Сезонный',
+                'box_for_her': 'Коробка для Нее', 'box_for_him': 'Коробка для Него', 'box_sweet': 'Со сладостями', 'box_red': 'Классика', 'box_premium': 'Премиум', 'box_sleep': 'Спящие Розы',
+                'buy': 'Купить',
+                'custom_order': 'Индивидуальный Заказ',
+                'occasion': 'Повод',
+                'budget': 'Бюджет (€)',
+                'wishes': 'Пожелания',
+                'send_request': 'Отправить запрос',
+                'password': 'Пароль',
+                'name': 'Имя',
+                'no_account': 'Нет аккаунта?',
+                'has_account': 'Уже есть аккаунт?',
+                'my_profile': 'Мой Профиль',
+                'my_orders': 'Мои Заказы',
+                'cart_title': 'Ваша корзина',
+                'apply': 'Применить',
+                'payment': 'Способ оплаты',
+                'address': 'Адрес доставки',
+                'continue_shopping': 'Назад',
+                'order_now': 'Заказать'
+            }
+        };
+
+        function toggleLangMenu() { document.getElementById('langMenu').classList.toggle('hidden'); }
+
+        function setLang(lang) {
+            document.getElementById('currentLang').innerText = lang;
+            document.getElementById('langMenu').classList.add('hidden');
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        // ----------------------------------------------------------------
+        // 2. BENDRA BŪSENA IR KINTAMIEJI
+        // ----------------------------------------------------------------
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let discountMultiplier = 1;
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        let isLoginMode = true; 
+
+        // ----------------------------------------------------------------
+        // 3. UI IR MODALŲ VALDYMAS
+        // ----------------------------------------------------------------
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                if (id === 'checkoutModal') renderCart();
+            }
+        }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        // ----------------------------------------------------------------
+        // 4. KREPŠELIO FUNKCIJOS
+        // ----------------------------------------------------------------
+        function addToCart(title, price) {
+            const existing = cart.find(i => i.title === title);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ title, price, quantity: 1 });
+            }
+            saveCart();
+            closeModal('bouquetModal');
+            closeModal('boxModal');
+            openModal('checkoutModal');
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            saveCart();
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+            renderCart();
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (total > 0) {
+                badge.innerText = total;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function applyDiscount() {
+            const code = document.getElementById('discountInput').value.trim().toUpperCase();
+            if (code === 'GELĖS20' || code === 'NUOLAIDA20') {
+                discountMultiplier = 0.8;
+                alert('Nuolaida pritaikyta (-20%)!');
+            } else {
+                alert('Neteisingas nuolaidos kodas!');
+                discountMultiplier = 1;
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const list = document.getElementById('cartItemsList');
+            if (!list) return;
+            if (cart.length === 0) {
+                list.innerHTML = '<p class="text-sm text-stone-400 italic py-4">Krepšelis tuščias.</p>';
+                return;
+            }
+
+            let subtotal = 0;
+            let itemsHTML = cart.map((item, index) => {
+                let cleanPrice = parseFloat(item.price.replace('€', '').replace(',', '.').trim());
+                let itemTotal = cleanPrice * item.quantity;
+                subtotal += itemTotal;
+                return `
+                    <div class="bg-stone-50 p-4 rounded-2xl flex items-center justify-between border border-stone-100">
+                        <div><h4 class="font-semibold text-stone-800 text-sm">${item.title}</h4>
+                        <p class="text-xs text-stone-500">${item.price} x ${item.quantity} = <span class="font-bold text-stone-800">${itemTotal.toFixed(2)} €</span></p></div>
+                        <div class="flex items-center space-x-3">
+                            <button onclick="updateQuantity(${index}, -1)" class="w-7 h-7 rounded-lg bg-white border border-stone-200 font-bold">-</button>
+                            <span class="text-sm font-semibold">${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, 1)" class="w-7 h-7 rounded-lg bg-white border border-stone-200 font-bold">+</button>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            let finalTotal = subtotal * discountMultiplier;
+            itemsHTML += `
+                <div class="pt-3 border-t border-stone-200 space-y-1 mt-2">
+                    ${discountMultiplier < 1 ? `<div class="flex justify-between text-xs text-emerald-600 font-medium"><span>Nuolaida:</span><span>-20%</span></div>` : ''}
+                    <div class="flex justify-between items-center"><span class="font-bold text-stone-800 text-base">Bendra suma:</span><span class="font-bold text-rose-900 text-lg">${finalTotal.toFixed(2)} €</span></div>
+                </div>`;
+            list.innerHTML = itemsHTML;
+            
+            if (currentUser && !document.getElementById('orderName').value) {
+                document.getElementById('orderName').value = currentUser.name;
+            }
+        }
+
+        function submitOrder() {
+            if (cart.length === 0) { alert('Krepšelis tuščias!'); return; }
+            const name = document.getElementById('orderName').value;
+            const address = document.getElementById('orderAddress').value;
+            const paymentElement = document.querySelector('input[name="paymentMethod"]:checked');
+            const paymentMethod = paymentElement ? paymentElement.value : 'SEB';
+
+            if (!name || !address) { alert('Įveskite vardą ir adresą!'); return; }
+
+            let subtotal = cart.reduce((sum, i) => sum + (parseFloat(i.price.replace('€','').replace(',','.').trim()) * i.quantity), 0);
+            let finalTotal = (subtotal * discountMultiplier).toFixed(2) + ' €';
+
+            const newOrder = {
+                title: cart.map(i => `${i.title} (${i.quantity})`).join(', '),
+                price: finalTotal,
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+            
+            if (currentUser) {
+                if (!currentUser.orders) currentUser.orders = [];
+                currentUser.orders.unshift(newOrder);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                const userIndex = users.findIndex(u => u.email === currentUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex] = currentUser;
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+            }
+            cart = []; discountMultiplier = 1; saveCart();
+            alert(`Užsakymas sėkmingai pateiktas! Mokėjimas: ${paymentMethod}. Ačiū!`);
+            closeModal('checkoutModal');
+            updateDashboardUI(); 
+            document.getElementById('orderAddress').value = '';
+            document.getElementById('discountInput').value = '';
+        }
+
+        function submitCustomOrder() {
+            alert('Užklausa sėkmingai išsiųsta! Mes su jumis susisieksime.');
+            closeModal('customModal');
+        }
+
+        // ----------------------------------------------------------------
+        // 5. PROFILIS IR AUTENTIFIKACIJA
+        // ----------------------------------------------------------------
+        function openProfileFlow() {
+            if (currentUser) { openModal('dashboardModal'); updateDashboardUI(); }
+            else { openModal('authModal'); updateAuthUI(); }
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            document.getElementById('loginForm').classList.toggle('hidden', !isLoginMode);
+            document.getElementById('registerForm').classList.toggle('hidden', isLoginMode);
+            document.getElementById('authModalTitle').innerText = isLoginMode ? (translations[document.getElementById('currentLang').innerText]?.login || "Prisijungimas") : (translations[document.getElementById('currentLang').innerText]?.register || "Registracija");
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const pass = document.getElementById('regPass').value;
+            if (!name || !email || !pass) { alert('Užpildykite visus laukus!'); return; }
+            if (users.find(u => u.email === email)) { alert('Toks el. paštas jau egzistuoja!'); return; }
+            
+            const newUser = { name, email, pass, orders: [] };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            alert('Registracija sėkminga!');
+            closeModal('authModal');
+            updateHeaderProfile();
+            openModal('dashboardModal');
+            updateDashboardUI();
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            const user = users.find(u => u.email === email && u.pass === pass);
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                closeModal('authModal');
+                updateHeaderProfile();
+                openModal('dashboardModal');
+                updateDashboardUI();
+            } else { alert('Neteisingas el. paštas arba slaptažodis!'); }
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            closeModal('dashboardModal');
+            updateHeaderProfile();
+        }
+
+        function updateHeaderProfile() {
+            const btnText = document.getElementById('headerProfileName');
+            if (currentUser) {
+                btnText.innerText = currentUser.name;
+                btnText.removeAttribute('data-i18n');
+            } else {
+                btnText.innerText = "Prisijungti";
+                btnText.setAttribute('data-i18n', 'login');
+                setLang(document.getElementById('currentLang').innerText); // Perverčia "Prisijungti"
+            }
+        }
+
+        function updateDashboardUI() {
+            if (!currentUser) return;
+            document.getElementById('dashName').innerText = currentUser.name;
+            document.getElementById('dashEmail').innerText = currentUser.email;
+            document.getElementById('dashAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
+
+            const ordersList = document.getElementById('userOrdersList');
+            if (!currentUser.orders || currentUser.orders.length === 0) {
+                ordersList.innerHTML = '<p class="text-sm text-stone-400 italic">Jūs dar neturite užsakymų.</p>';
+            } else {
+                ordersList.innerHTML = currentUser.orders.map(order => `
+                    <div class="bg-white border border-stone-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-start mb-2">
+                            <p class="text-xs font-semibold text-stone-400 bg-stone-100 px-2 py-1 rounded-lg">${order.date}</p>
+                            <p class="text-lg font-bold text-rose-900">${order.price}</p>
+                        </div>
+                        <p class="text-sm font-medium text-stone-800">${order.title}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+            updateHeaderProfile();
+            setLang('LT'); // Default language
+        });
+    </script>
+</body>
+</html>
